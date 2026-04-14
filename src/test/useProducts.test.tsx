@@ -7,6 +7,24 @@ describe('useProducts', () => {
         expect(result).toHaveProperty('products');
     });
 
+    it("should return all products through getAllProducts", () => {
+        const { getAllProducts } = useProducts();
+        const allProducts = getAllProducts();
+
+        expect(Array.isArray(allProducts)).toBe(true);
+        expect(allProducts).toHaveLength(10);
+        expect(allProducts[0]).toHaveProperty("id");
+        expect(allProducts[0]).toHaveProperty("title");
+    });   
+
+    it("should return a product by id through getProductById", () => {
+        const { getProductById } = useProducts();
+        const product = getProductById(1);
+
+        expect(product).toBeDefined();
+        expect(product?.id).toBe(1);
+    });
+
     it('should return an array of products', () => {
         const { products } = useProducts();
         expect(Array.isArray(products)).toBe(true);
